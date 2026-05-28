@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>+C.Juicy — Build Your Bowl, Boost Your Health</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--g:#14432E;--l:#D0FF00;--l2:#BCE600;--l3:#9fb800;--w:#fff;--light:#f0fdf5}
+    html{scroll-behavior:smooth}
+    body{font-family:'Bricolage Grotesque',sans-serif;background:var(--g);color:var(--w);overflow-x:hidden}
+
+    /* ── NAVBAR ─────────────────────────────── */
+    nav{
+      position:fixed;top:20px;left:50%;transform:translateX(-50%);
+      z-index:999;background:#fff;border-radius:100px;
+      padding:10px 12px 10px 22px;
+      display:flex;align-items:center;gap:28px;
+      box-shadow:0 4px 40px rgba(0,0,0,.12);white-space:nowrap
+    }
+    .nav-logo{display:flex;align-items:center;text-decoration:none}
+    .nav-logo img{height:24px;width:auto}
+    .nav-links{display:flex;gap:22px;list-style:none}
+    .nav-links a{color:var(--g);text-decoration:none;font-weight:500;font-size:14px;opacity:.7;transition:opacity .2s}
+    .nav-links a:hover{opacity:1}
+    .nav-cta{background:var(--l);color:var(--g);font-weight:800;font-size:14px;
+      padding:10px 22px;border-radius:100px;text-decoration:none;
+      transition:background .2s,transform .2s}
+    .nav-cta:hover{background:var(--l2);transform:scale(1.03)}
+
+    /* ── HERO ──────────────────────────────── */
+    .hero{
+      position:relative;overflow:hidden;
+      display:flex;flex-direction:column;align-items:center;
+      justify-content:center;padding:130px 24px 80px;
+      background:url('asset/photo 1.png') center/cover no-repeat
+    }
+    .hero::before{
+      content:'';position:absolute;inset:0;
+      background:rgba(20,67,46,.72);z-index:0
+    }
+    .hero>*{position:relative;z-index:1}
+    .hero-icon{width:54px;margin-bottom:18px}
+    .hero h1{
+      font-size:clamp(44px,9vw,124px);font-weight:800;
+      text-align:center;line-height:1.0;letter-spacing:-2px;max-width:960px
+    }
+    .hero h1 em{font-style:italic;color:var(--l)}
+    .hero-sub{font-size:17px;text-align:center;margin-top:20px;
+      opacity:.75;max-width:460px;line-height:1.7}
+    .hero-btns{display:flex;gap:12px;margin-top:34px}
+    .btn-lime{background:var(--l);color:var(--g);font-family:inherit;font-weight:800;
+      font-size:15px;padding:13px 26px;border-radius:100px;border:none;
+      cursor:pointer;text-decoration:none;transition:background .2s,transform .2s}
+    .btn-lime:hover{background:var(--l2);transform:scale(1.03)}
+    .btn-ghost{background:transparent;color:#fff;font-family:inherit;font-weight:600;
+      font-size:15px;padding:13px 26px;border-radius:100px;
+      border:1.5px solid rgba(255,255,255,.35);text-decoration:none;
+      transition:border-color .2s}
+    .btn-ghost:hover{border-color:#fff}
+
+    /* ── HIGHLIGHTS ────────────────────────── */
+    .highlights{background:var(--light);color:var(--g);padding:96px 24px}
+    .hl-title{text-align:center;font-size:clamp(16px,2.6vw,28px);
+      font-weight:600;max-width:760px;margin:0 auto 56px;line-height:1.5}
+    .hl-title .sp{font-weight:800}
+
+    /* Product Slider */
+    .product-slider{
+      max-width:420px;margin:0 auto 56px;position:relative;
+      display:flex;align-items:center;gap:0
+    }
+    .slider-viewport{overflow:hidden;border-radius:24px;flex:1}
+    .slider-track{
+      display:flex;transition:transform .42s cubic-bezier(.4,0,.2,1)
+    }
+    .slide{
+      flex:0 0 100%;display:flex;flex-direction:column;align-items:center;
+      justify-content:center;gap:10px;padding:0 4px 10px
+    }
+    .slide img{
+      width:100%;border-radius:20px;
+      box-shadow:0 20px 60px rgba(20,67,46,.15);
+      aspect-ratio:1/1;object-fit:cover
+    }
+    .slide-title{
+      font-size:clamp(15px,2vw,18px);font-weight:700;
+      color:var(--g);text-align:center;
+      padding:0 8px
+    }
+    .slider-btn{
+      background:var(--g);color:var(--l);border:none;
+      width:42px;height:42px;border-radius:50%;
+      font-size:18px;cursor:pointer;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      transition:background .2s,transform .15s;z-index:2;
+      box-shadow:0 4px 16px rgba(20,67,46,.18)
+    }
+    .slider-btn:hover{background:var(--l);color:var(--g);transform:scale(1.08)}
+    .slider-prev{margin-right:14px}
+    .slider-next{margin-left:14px}
+    .slider-indicators{display:flex;gap:7px;justify-content:center;margin-top:16px}
+    .slider-dot{
+      width:7px;height:7px;border-radius:50%;
+      background:rgba(20,67,46,.2);cursor:pointer;transition:background .3s,transform .3s
+    }
+    .slider-dot.active{background:var(--g);transform:scale(1.4)}
+
+    /* feature grid under slider */
+    .hl-grid{display:grid;grid-template-columns:1fr 1fr;
+      gap:20px;max-width:720px;margin:0 auto}
+    .hl-item{display:flex;gap:14px;align-items:flex-start}
+    .hl-ico{width:40px;height:40px;flex-shrink:0;border-radius:50%;
+      border:1.5px solid rgba(20,67,46,.2);display:flex;align-items:center;
+      justify-content:center;font-size:17px}
+    .hl-item h3{font-size:15px;font-weight:700;margin-bottom:3px}
+    .hl-item p{font-size:13px;opacity:.65;line-height:1.55}
+
+    /* ── BMC 3D SCROLL ─────────────────────── */
+    .bmc-section{background:var(--g)}
+    .bmc-scroll-space{height:600vh;position:relative}
+    .bmc-sticky{
+      position:sticky;top:0;height:100vh;
+      display:flex;flex-direction:column;align-items:center;
+      justify-content:flex-start;
+      padding-top:110px;padding-bottom:24px;
+      overflow:hidden;gap:8px
+    }
+    .bmc-heading{
+      position:absolute;top:84px;left:50%;transform:translateX(-50%);
+      font-size:clamp(18px,2.8vw,38px);font-weight:800;
+      white-space:nowrap;text-align:center
+    }
+    .bmc-heading em{font-style:italic;color:var(--l)}
+
+    /* ISO scene */
+    .iso-scene{
+      perspective:1000px;perspective-origin:50% 50%;
+      flex-shrink:0;
+      zoom:0.76;
+    }
+    .iso-world{
+      transform:rotateX(45deg) rotateZ(-45deg);
+      transform-style:preserve-3d;
+      position:relative;
+      width:500px;height:560px
+    }
+    .iso-block{
+      position:absolute;transform-style:preserve-3d;
+      transition:all .7s cubic-bezier(.34,1.2,.64,1)
+    }
+    .iso-block .f-top,
+    .iso-block .f-front,
+    .iso-block .f-side{position:absolute;backface-visibility:hidden;transition:background .6s}
+    /* inactive */
+    .iso-block .f-top  {background:rgba(255,255,255,.09)}
+    .iso-block .f-front{background:rgba(255,255,255,.05)}
+    .iso-block .f-side {background:rgba(255,255,255,.06)}
+    /* active */
+    .iso-block.active .f-top  {background:var(--l)}
+    .iso-block.active .f-front{background:var(--l2)}
+    .iso-block.active .f-side {background:var(--l3)}
+    /* label on top face */
+    .iso-block .blabel{
+      position:absolute;top:50%;left:50%;
+      transform:translateX(-50%) translateY(-50%);
+      font-size:16px;font-weight:700;text-align:center;
+      white-space:pre-line;word-break:break-word;
+      pointer-events:none;line-height:1.3;
+      width:92%;transition:color .5s
+    }
+    .iso-block.active .blabel{color:var(--g)}
+    .iso-block:not(.active) .blabel{color:rgba(255,255,255,.45)}
+
+    /* BMC info panel */
+    .bmc-info{
+      margin-top:16px;
+      width:min(600px,90vw);
+      background:#fff;
+      border-radius:20px;
+      padding:20px 24px 16px;
+      min-height:160px;
+      display:flex;flex-direction:column;gap:8px;
+      box-shadow:0 8px 32px rgba(0,0,0,.08);
+      overflow:hidden;
+      flex-shrink:1
+    }
+    .bmc-info-title{font-size:18px;font-weight:800;color:var(--g);line-height:1.2;flex-shrink:0}
+    .bmc-info-points{
+      display:flex;flex-direction:column;gap:4px;
+      font-size:12.5px;color:var(--g);opacity:.7;line-height:1.55;
+      overflow:hidden;flex-shrink:1;min-height:0
+    }
+    .bmc-info-points span::before{content:'— '}
+
+    /* progress dots — inside card, always at bottom */
+    .bmc-progress{
+      display:flex;gap:7px;align-items:center;
+      margin-top:auto;padding-top:12px;
+      border-top:1px solid rgba(20,67,46,.08);
+      flex-shrink:0
+    }
+    .bmc-dot{
+      width:7px;height:7px;border-radius:50%;
+      background:rgba(0,0,0,0.12);
+      transition:background .3s,transform .3s
+    }
+    .bmc-dot.active{
+      background:rgba(0,0,0,0.55);
+      transform:scale(1.4)
+    }
+
+    /* ── ORG SECTION ───────────────────────── */
+    .org-section{background:var(--light);color:var(--g);padding:110px 24px 100px}
+    .sec-label{text-align:center;font-size:11px;letter-spacing:3px;
+      text-transform:uppercase;opacity:.4;margin-bottom:12px}
+    .sec-heading{font-size:clamp(28px,5vw,60px);font-weight:800;
+      text-align:center;letter-spacing:-1px;margin-bottom:8px}
+    .sec-sub{text-align:center;font-size:14px;opacity:.55;
+      margin-bottom:60px;max-width:380px;margin-left:auto;margin-right:auto;line-height:1.6}
+
+    .org-chart{display:flex;flex-direction:column;align-items:center;
+      max-width:700px;margin:0 auto;width:100%;padding:0 16px}
+
+    /* all cards same size, fluid on small screens */
+    .org-card{
+      background:#fff;border-radius:20px;
+      padding:24px 20px 20px;text-align:center;
+      width:min(200px, calc(50vw - 32px));
+      box-shadow:0 4px 24px rgba(20,67,46,.09);
+      border:1.5px solid rgba(20,67,46,.07);
+      transition:transform .3s,box-shadow .3s;flex-shrink:0
+    }
+    .org-card:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(20,67,46,.14)}
+    .org-card img{
+      width:76px;height:76px;border-radius:50%;
+      object-fit:cover;object-position:center top;
+      border:3px solid var(--l);margin-bottom:10px;display:block;margin-left:auto;margin-right:auto
+    }
+    .org-name{font-weight:700;font-size:13px;color:var(--g);line-height:1.35;margin-bottom:8px}
+    .org-role{display:inline-block;background:var(--g);color:var(--l);
+      font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px}
+
+    /* SVG connector — scales with container */
+    .org-connector{display:block;overflow:visible;width:100%;max-width:480px}
+
+    .org-staff-row{
+      display:flex;justify-content:center;
+      gap:clamp(12px,4vw,80px);
+      align-items:stretch;
+      width:100%
+    }
+    /* staff-row cards: equal flexible width + same height via flex column */
+    .org-staff-row .org-card{
+      flex:1;max-width:200px;min-width:0;width:auto;
+      display:flex;flex-direction:column;align-items:center
+    }
+    .org-staff-row .org-role{margin-top:auto}
+
+    /* ── SLOGAN + PRE-ORDER ─────────────────── */
+    .slogan-section{
+      background:var(--g);min-height:100vh;
+      display:flex;flex-direction:column;align-items:center;
+      justify-content:center;padding:80px 24px;
+      position:relative;overflow:hidden
+    }
+    /* Concentric icon-shaped rings */
+    .icon-rings-bg{
+      position:absolute;inset:0;
+      display:flex;align-items:center;justify-content:center;
+      pointer-events:none;overflow:hidden;z-index:0
+    }
+    /* single wrapper that scales uniformly on scroll */
+    .rings-wrapper{
+      position:absolute;
+      transform:translate(-50%,-50%) scale(1);
+      transform-origin:center;
+      will-change:transform
+    }
+    .ring-layer{
+      position:absolute;
+      background:url('asset/icon stroke.svg') center/contain no-repeat;
+    }
+    .slogan-section>*:not(.icon-rings-bg){position:relative;z-index:1}
+
+    /* center icon only */
+    .slogan-icon-wrap{
+      width:80px;height:80px;display:flex;
+      align-items:center;justify-content:center;
+      margin-bottom:48px;position:relative;z-index:2
+    }
+    .slogan-icon-wrap img{width:80px;height:auto}
+
+    .slogan-chip{font-size:11px;letter-spacing:3px;text-transform:uppercase;
+      opacity:.45;margin-bottom:16px}
+    .slogan-h{
+      font-size:clamp(36px,6.5vw,84px);font-weight:800;
+      text-align:center;line-height:1.05;letter-spacing:-1.5px;max-width:820px
+    }
+    .slogan-h em{color:var(--l);font-style:italic}
+    .slogan-sub{font-size:16px;opacity:.6;margin-top:18px;text-align:center;max-width:380px;line-height:1.6}
+
+    /* Pre-order card */
+    .po-card{
+      margin-top:56px;border:1.5px solid rgba(208,255,0,.22);border-radius:24px;
+      padding:36px 44px;max-width:600px;width:100%;
+      background:rgba(208,255,0,.04);backdrop-filter:blur(8px)
+    }
+    .po-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 32px}
+    .po-item.full{grid-column:1/-1}
+    .po-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:.38;margin-bottom:6px}
+    .po-val{font-size:17px;font-weight:700;color:var(--l);line-height:1.3}
+    .po-val.wh{color:#fff;font-size:14px;font-weight:500;opacity:.88;line-height:1.6}
+    .po-div{height:1px;background:rgba(208,255,0,.14);margin:24px 0}
+    .pricelist{display:flex;flex-direction:column;gap:10px}
+    .price-row{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+    .price-row span:first-child{opacity:.8}
+    .price-row span:last-child{font-weight:700;color:var(--l)}
+    .po-cta{display:flex;justify-content:center;margin-top:32px}
+
+    /* ── FOOTER ────────────────────────────── */
+    .footer{background:var(--light);color:var(--g);overflow:hidden}
+    .footer-top{display:flex;justify-content:space-between;align-items:flex-start;padding:56px 48px 0}
+    .footer-nav{display:flex;flex-direction:column;gap:10px}
+    .footer-nav a{color:var(--g);text-decoration:none;font-size:14px;
+      font-weight:500;opacity:.5;transition:opacity .2s}
+    .footer-nav a:hover{opacity:1}
+    .footer-socials{display:flex;gap:14px;align-items:center}
+    .footer-socials a{
+      width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(20,67,46,.18);
+      display:flex;align-items:center;justify-content:center;color:var(--g);
+      text-decoration:none;transition:background .2s,color .2s
+    }
+    .footer-socials a:hover{background:var(--g);color:var(--l)}
+    .footer-brand-row{
+      display:flex;align-items:flex-end;justify-content:space-between;
+      padding:16px 36px 0;overflow:hidden
+    }
+    .footer-big{
+      font-size:clamp(64px,13vw,176px);font-weight:800;
+      letter-spacing:-3px;line-height:.9;color:var(--g)
+    }
+    .footer-big em{font-style:italic}
+    .footer-icon{width:110px;opacity:.8;flex-shrink:0;margin-bottom:8px}
+    .footer-bottom{
+      background:var(--g);margin-top:28px;padding:20px 48px;
+      display:flex;justify-content:space-between;align-items:center
+    }
+    .footer-bottom span{font-size:12px;opacity:.4;color:#fff}
+    .footer-bottom .ft-links{display:flex;gap:24px}
+    .footer-bottom a{font-size:12px;opacity:.4;color:#fff;
+      text-decoration:none;transition:opacity .2s}
+    .footer-bottom a:hover{opacity:.8}
+
+    /* ── REVEAL ────────────────────────────── */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+    .reveal.in{opacity:1;transform:none}
+    .reveal-d1{transition-delay:.1s}
+    .reveal-d2{transition-delay:.2s}
+    .reveal-d3{transition-delay:.3s}
+
+    /* ── HAMBURGER ─────────────────────────── */
+    .nav-burger{
+      display:none;background:none;border:none;
+      cursor:pointer;padding:8px;gap:5px;
+      flex-direction:column;align-items:center;
+      color:var(--g)
+    }
+    .nav-burger span{
+      display:block;width:20px;height:2px;
+      background:var(--g);border-radius:2px;
+      transition:transform .25s,opacity .25s
+    }
+    .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .nav-burger.open span:nth-child(2){opacity:0}
+    .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+    /* Mobile dropdown card */
+    .nav-mobile-menu{
+      position:fixed;top:76px;left:50%;transform:translateX(-50%);
+      z-index:998;background:#fff;border-radius:20px;
+      padding:20px 28px;min-width:220px;
+      box-shadow:0 8px 40px rgba(0,0,0,.15);
+      display:none;flex-direction:column;gap:4px;
+      animation:fadeSlideDown .2s ease
+    }
+    .nav-mobile-menu.open{display:flex}
+    @keyframes fadeSlideDown{
+      from{opacity:0;transform:translateX(-50%) translateY(-10px)}
+      to  {opacity:1;transform:translateX(-50%) translateY(0)}
+    }
+    .nav-mobile-menu a{
+      color:var(--g);text-decoration:none;font-weight:600;font-size:15px;
+      padding:10px 0;opacity:.65;transition:opacity .2s;
+      border-bottom:1px solid rgba(20,67,46,.07)
+    }
+    .nav-mobile-menu a:last-child{border-bottom:none}
+    .nav-mobile-menu a:hover{opacity:1}
+    .nav-mobile-menu .mob-cta{
+      margin-top:8px;background:var(--l);color:var(--g);
+      font-weight:800;padding:12px 22px;border-radius:100px;
+      text-align:center;opacity:1;border-bottom:none
+    }
+
+    /* ── RESPONSIVE ────────────────────────── */
+    @media(max-width:900px){
+      .hl-grid{grid-template-columns:1fr;text-align:left}
+      .hl-right .hl-item{flex-direction:row;text-align:left}
+      .hl-center{order:-1}
+      .iso-scene{zoom:0.72}
+      .bmc-info{min-height:0}
+    }
+    @media(max-width:640px){
+      .iso-scene{zoom:0.52}
+      .bmc-info{min-height:0}
+    }
+    @media(max-width:640px){
+      nav{gap:12px;padding:8px 10px 8px 16px}
+      .nav-links{display:none}
+      .nav-cta{display:none}
+      .nav-burger{display:flex}
+      .hero{min-height:100vh}
+      .org-staff-row{gap:clamp(8px,3vw,20px)}
+      .po-grid{grid-template-columns:1fr}
+      .po-item.full{grid-column:1}
+      .footer-big{font-size:56px}
+      .footer-top{flex-direction:column;gap:20px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══════════════════════════════════ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="asset/Logo.png" alt="+C.Juicy"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#bmc">BMC</a></li>
+    <li><a href="#tim">Tim</a></li>
+    <li><a href="#preorder">Pre-Order</a></li>
+  </ul>
+  <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#preorder" class="nav-cta">Pre-Order Sekarang</a>
+</nav>
+
+<!-- Mobile Menu Card -->
+<div class="nav-mobile-menu" id="nav-mobile-menu" role="navigation">
+  <a href="#bmc" class="mob-link">Business Model Canvas</a>
+  <a href="#tim" class="mob-link">Struktur Tim</a>
+  <a href="#preorder" class="mob-link">Pre-Order</a>
+  <a href="#preorder" class="mob-cta">Pre-Order Sekarang</a>
+</div>
+
+
+<!-- ═══ HERO ═════════════════════════════════════ -->
+<section class="hero">
+  <img class="hero-icon reveal" src="asset/main-icon.svg" alt="icon"/>
+  <h1 class="reveal reveal-d1">Build Your <em>Bowl,</em><br>Boost Your Health</h1>
+  <p class="hero-sub reveal reveal-d2">
+    Sup buah custom segar yang kamu susun sendiri — fresh, sehat, seru, dan layak tampil di feed-mu.
+  </p>
+  <div class="hero-btns reveal reveal-d2">
+    <a href="https://bit.ly/OpenPreOrderCjuicy" target="_blank" class="btn-lime">Pre-Order Sekarang</a>
+    <a href="#bmc" class="btn-ghost">Tentang Kami</a>
+  </div>
+</section>
+
+
+<!-- ═══ HIGHLIGHTS ════════════════════════════════ -->
+<section class="highlights">
+  <p class="hl-title reveal">
+    The flagship product: sup buah custom <span class="sp">SEGAR &amp; INTERAKTIF</span> yang kamu desain sendiri
+  </p>
+
+  <!-- Product Slider -->
+  <div class="product-slider reveal">
+    <button class="slider-btn slider-prev" id="slider-prev" aria-label="Sebelumnya">&#8592;</button>
+    <div class="slider-viewport">
+      <div class="slider-track" id="slider-track">
+        <div class="slide">
+          <img src="asset/product 1.png" alt="Sup Buah Kuah Jus Mangga"/>
+          <div class="slide-title">Sup Buah Kuah Jus Mangga</div>
+        </div>
+        <div class="slide">
+          <img src="asset/product 3.png" alt="Sup Buah Kuah Jus Alpukat"/>
+          <div class="slide-title">Sup Buah Kuah Jus Alpukat</div>
+        </div>
+        <div class="slide">
+          <img src="asset/product 2.png" alt="Sup Buah Kuah Klasik"/>
+          <div class="slide-title">Sup Buah Kuah Klasik</div>
+        </div>
+      </div>
+    </div>
+    <button class="slider-btn slider-next" id="slider-next" aria-label="Berikutnya">&#8594;</button>
+  </div>
+  <div class="slider-indicators reveal">
+    <div class="slider-dot active" data-idx="0"></div>
+    <div class="slider-dot" data-idx="1"></div>
+    <div class="slider-dot" data-idx="2"></div>
+  </div>
+
+  <!-- Feature items -->
+  <div class="hl-grid" style="margin-top:40px">
+    <div class="hl-item reveal">
+      <div class="hl-ico">🍓</div>
+      <div><h3>Custom Sesuai Selera</h3><p>Pilih sendiri buah &amp; jus favoritmu — tanpa pengawet, tanpa pemanis buatan.</p></div>
+    </div>
+    <div class="hl-item reveal reveal-d1">
+      <div class="hl-ico">🎮</div>
+      <div><h3>Lemon Challenge</h3><p>Station game interaktif — menang = dapat reward potongan buah gratis!</p></div>
+    </div>
+    <div class="hl-item reveal">
+      <div class="hl-ico">📸</div>
+      <div><h3>Konten-Worthy</h3><p>Booth menarik + aktivitas seru = konten organik yang posting sendiri ke sosmedmu.</p></div>
+    </div>
+    <div class="hl-item reveal reveal-d1">
+      <div class="hl-ico">⚡</div>
+      <div><h3>Cepat &amp; Praktis</h3><p>Cocok untuk event &amp; bazar — segar langsung di tangan, tanpa antri lama.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ BMC 3D SCROLL ═══════════════════════════ -->
+<section class="bmc-section" id="bmc">
+  <div class="bmc-scroll-space">
+    <div class="bmc-sticky">
+
+      <h2 class="bmc-heading">Business Model <em>Canvas</em></h2>
+
+      <!-- 3D Scene -->
+      <div class="iso-scene">
+        <div class="iso-world" id="iso-world"></div>
+      </div>
+
+      <!-- Info panel below diagram -->
+      <div class="bmc-info">
+        <div class="bmc-info-title" id="bmc-title">Key Partners</div>
+        <div class="bmc-info-points" id="bmc-pts"></div>
+        <!-- Progress dots inside card -->
+        <div class="bmc-progress" id="bmc-progress"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ ORG STRUCTURE ═══════════════════════════ -->
+<section class="org-section" id="tim">
+  <p class="sec-label reveal">Struktur Organisasi</p>
+  <h2 class="sec-heading reveal">Tim <em style="font-style:italic">Kami</em></h2>
+  <p class="sec-sub reveal">Tiga orang, satu misi: membuat sup buah custom terbaik di kampus.</p>
+
+  <div class="org-chart">
+
+    <!-- CEO -->
+    <div class="org-card reveal">
+      <img src="asset/Dhesma Khenerossa Dhevi - CEO.jpeg" alt="CEO"/>
+      <div class="org-name">Dhesma Khenerossa Dhevi</div>
+      <span class="org-role">CEO</span>
+    </div>
+
+    <!-- SVG Curved Connector -->
+    <svg class="org-connector" width="480" height="100"
+         viewBox="-240 0 480 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Left branch → CFO -->
+      <path d="M 0 0 L 0 30 Q 0 52 -22 52 L -118 52 Q -140 52 -140 74 L -140 100"
+            fill="none" stroke="#14432E" stroke-width="2" stroke-opacity=".25"
+            stroke-linecap="round"/>
+      <!-- Right branch → CMO -->
+      <path d="M 0 0 L 0 30 Q 0 52 22 52 L 118 52 Q 140 52 140 74 L 140 100"
+            fill="none" stroke="#14432E" stroke-width="2" stroke-opacity=".25"
+            stroke-linecap="round"/>
+    </svg>
+
+    <!-- CFO + CMO -->
+    <div class="org-staff-row">
+      <div class="org-card reveal">
+        <img src="asset/Muhammad Aydin Raviv - CFO.jpeg" alt="CFO"/>
+        <div class="org-name">Muhammad Aydin Raviv</div>
+        <span class="org-role">CFO</span>
+      </div>
+      <div class="org-card reveal reveal-d1">
+        <img src="asset/Wanyu Pandu Wijaya - CMO.JPG" alt="CMO"/>
+        <div class="org-name">Wanyu Pandu Wijaya</div>
+        <span class="org-role">CMO</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ SLOGAN + PRE-ORDER ════════════════════════ -->
+<section class="slogan-section" id="preorder">
+
+  <!-- Concentric icon-shaped rings (scroll-driven uniform scale) -->
+  <div class="icon-rings-bg">
+    <div class="rings-wrapper" id="rings-wrapper"></div>
+  </div>
+
+  <!-- Center: icon only -->
+  <div class="slogan-icon-wrap">
+    <img src="asset/main-icon.svg" alt="+C.Juicy icon"/>
+  </div>
+
+  <p class="slogan-chip reveal">Slogan Kami</p>
+  <h2 class="slogan-h reveal">Build Your <em>Bowl,</em><br>Boost Your Health.</h2>
+  <p class="slogan-sub reveal reveal-d1">Sup buah custom yang bisa kamu nikmati sekaligus abadikan.</p>
+
+  <!-- Pre-order info card -->
+  <div class="po-card reveal reveal-d2">
+    <div class="po-grid">
+      <div class="po-item">
+        <div class="po-lbl">Periode Pre-Order</div>
+        <div class="po-val">28 Mei – 2 Juni 2026</div>
+      </div>
+      <div class="po-item">
+        <div class="po-lbl">Pengambilan</div>
+        <div class="po-val">Rabu, 3 Juni 2026</div>
+      </div>
+      <div class="po-item full">
+        <div class="po-lbl">Lokasi</div>
+        <div class="po-val wh">
+          Expo Kewirausahaan<br>
+          Auditorium Hardjono Danosastro<br>
+          Fakultas Pertanian, UGM
+        </div>
+      </div>
+    </div>
+
+    <div class="po-div"></div>
+
+    <div class="po-lbl" style="margin-bottom:12px">Pricelist</div>
+    <div class="pricelist">
+      <div class="price-row"><span>Sup Buah Kuah Jus Mangga</span><span>Rp 15.000</span></div>
+      <div class="price-row"><span>Sup Buah Kuah Jus Alpukat</span><span>Rp 15.000</span></div>
+      <div class="price-row"><span>Sup Buah Kuah Klasik</span><span>Rp 12.000</span></div>
+    </div>
+  </div>
+
+  <div class="po-cta reveal">
+    <a href="https://bit.ly/OpenPreOrderCjuicy" target="_blank" class="btn-lime" style="font-size:15px;padding:14px 32px">
+      Order via Google Form &rarr;
+    </a>
+  </div>
+
+</section>
+
+
+<!-- ═══ FOOTER ════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-nav">
+      <a href="#bmc">Business Model Canvas</a>
+      <a href="#tim">Struktur Tim</a>
+      <a href="#preorder">Pre-Order</a>
+    </div>
+    <div class="footer-socials">
+      <a href="https://instagram.com/plusc.juicy" target="_blank" title="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a href="https://wa.me/6289602316565?text=Halo%20kak%2C%20saya%20mau%20pre-order%20%2BC.Juicy%21%20%F0%9F%8D%93%20Boleh%20info%20lebih%20lanjut%3F" target="_blank" title="WhatsApp (Dhesma)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-brand-row">
+    <div class="footer-big">+C.<em>Juicy</em></div>
+    <img class="footer-icon" src="asset/main-icon.svg" alt=""/>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 +C.Juicy — Fakultas Pertanian, UGM</span>
+    <div class="ft-links">
+      <a href="#">Instagram</a>
+      <a href="#">Pre-Order</a>
+      <a href="#">Kontak</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+/* ─── REVEAL ─────────────────────────────── */
+const revObs = new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting) e.target.classList.add('in');
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+
+/* ─── BMC DATA ───────────────────────────── */
+const BMC = [
+  {
+    id:'kp', label:'Key\nPartners', x:0, y:0, w:120, d:120, h:65,
+    title:'Key Partners',
+    pts:['Supplier buah segar (pasar lokal & grosir)', 'Toko plastik (mangkuk, sedotan, sendok)', 'Pengelola booth / stand pameran']
+  },
+  {
+    id:'cs', label:'Customer\nSegments', x:280, y:0, w:120, d:120, h:210,
+    title:'Customer Segments',
+    pts:['Anak muda & Gen Z (suka hal interaktif)', 'Pengunjung event & bazar', 'Pecinta minuman segar & sehat']
+  },
+  {
+    id:'kr', label:'Key\nResources', x:0, y:140, w:120, d:120, h:55,
+    title:'Key Resources',
+    pts:['Booth & meja display', 'Peralatan buah, pisau, blender', 'Station game lemon + reward stok', 'SDM 1–2 orang']
+  },
+  {
+    id:'vp', label:'Value\nProposition', x:130, y:60, w:160, d:260, h:75,
+    title:'Value Proposition',
+    pts:['Sup buah custom segar & sehat', 'Pengalaman interaktif (Lemon Game)', 'Konten-worthy & memorable', 'Cepat & praktis saat event']
+  },
+  {
+    id:'cr', label:'Customer\nRelationship', x:280, y:140, w:120, d:120, h:200,
+    title:'Customer Relationship',
+    pts:['Engagement via Lemon Game', 'Word-of-mouth organik', 'Konten sosmed pelanggan sebagai promosi']
+  },
+  {
+    id:'ka', label:'Key\nActivities', x:0, y:280, w:120, d:120, h:92,
+    title:'Key Activities',
+    pts:['Persiapan harian (cuci, kupas, susun buah)', 'Pembuatan fresh tiap sesi', 'Operasional Lemon Game', 'Layanan custom order & packaging']
+  },
+  {
+    id:'ch', label:'Channels', x:280, y:280, w:120, d:120, h:210,
+    title:'Channels',
+    pts:['Word of mouth personal', 'Kontak penyelenggara event & bazar', 'Grup WhatsApp & story sosmed']
+  },
+  {
+    id:'cost', label:'Cost Structure', x:0, y:420, w:260, d:100, h:38,
+    title:'Cost Structure',
+    pts:['Buah segar, jus, es batu, lemon', 'Packaging (gelas, tutup, sendok)', 'Operasional harian & transport', 'Reward game']
+  },
+  {
+    id:'rs', label:'Revenue Streams', x:285, y:420, w:215, d:100, h:48,
+    title:'Revenue Streams',
+    pts:['Penjualan utama: sup buah custom', 'Upselling: upgrade ukuran gelas', 'Add-ons: extra topping']
+  },
+];
+
+const ORDER = ['kp','kr','ka','vp','cr','ch','cs','cost','rs'];
+
+/* ─── BUILD ISO BLOCKS ───────────────────── */
+const world = document.getElementById('iso-world');
+const blockMap = {};
+
+BMC.forEach(b => {
+  const el = document.createElement('div');
+  el.className = 'iso-block';
+  el.id = 'blk-'+b.id;
+  el.style.cssText = `left:${b.x}px;top:${b.y}px;width:${b.w}px;height:${b.d}px;`;
+
+  // Top face (XY plane at height h)
+  const top = document.createElement('div');
+  top.className = 'f-top';
+  top.style.cssText = `width:${b.w}px;height:${b.d}px;position:absolute;left:0;top:0;transform:translateZ(${b.h}px);`;
+
+  // Label on top face
+  const lbl = document.createElement('div');
+  lbl.className = 'blabel';
+  lbl.textContent = b.label;
+  top.appendChild(lbl);
+
+  // South face (+Y direction): at bottom edge of div, rotateX(-90deg) at origin=bottom
+  const front = document.createElement('div');
+  front.className = 'f-front';
+  front.style.cssText = `width:${b.w}px;height:${b.h}px;position:absolute;left:0;bottom:0;transform-origin:bottom center;transform:rotateX(-90deg);`;
+
+  // West face (-X direction): at left edge, rotateY(-90deg) at origin=left
+  const side = document.createElement('div');
+  side.className = 'f-side';
+  side.style.cssText = `width:${b.h}px;height:${b.d}px;position:absolute;left:0;top:0;transform-origin:left center;transform:rotateY(-90deg);`;
+
+  el.appendChild(top);
+  el.appendChild(front);
+  el.appendChild(side);
+  world.appendChild(el);
+  blockMap[b.id] = el;
+});
+
+/* ─── PROGRESS DOTS ──────────────────────── */
+const prog = document.getElementById('bmc-progress');
+ORDER.forEach((_,i) => {
+  const d = document.createElement('div');
+  d.className = 'bmc-dot';
+  d.id = 'dot'+i;
+  prog.appendChild(d);
+});
+
+/* ─── BMC SCROLL LOGIC ───────────────────── */
+const bmcSpace = document.querySelector('.bmc-scroll-space');
+const bmcTitle = document.getElementById('bmc-title');
+const bmcPts   = document.getElementById('bmc-pts');
+let curStep = -1;
+
+function setStep(step) {
+  if (step === curStep) return;
+  curStep = step;
+  ORDER.forEach(id => blockMap[id].classList.remove('active'));
+  document.querySelectorAll('.bmc-dot').forEach(d => d.classList.remove('active'));
+  if (step < 0 || step >= ORDER.length) return;
+
+  const id = ORDER[step];
+  blockMap[id].classList.add('active');
+  document.getElementById('dot'+step)?.classList.add('active');
+
+  const data = BMC.find(b => b.id === id);
+  if (!data) return;
+  bmcTitle.textContent = data.title;
+  bmcPts.innerHTML = data.pts.map(p=>`<span>${p}</span>`).join('');
+}
+
+window.addEventListener('scroll', () => {
+  const rect = bmcSpace.getBoundingClientRect();
+  const total = bmcSpace.offsetHeight - window.innerHeight;
+  const scrolled = -rect.top;
+  const frac = scrolled / total;
+  const step = Math.min(Math.floor(frac * ORDER.length), ORDER.length - 1);
+  setStep(Math.max(0, step));
+}, {passive: true});
+
+setStep(0);
+
+
+/* ─── PRODUCT SLIDER ─────────────────────── */
+(function(){
+  const track  = document.getElementById('slider-track');
+  const prevBtn= document.getElementById('slider-prev');
+  const nextBtn= document.getElementById('slider-next');
+  const dots   = document.querySelectorAll('.slider-dot');
+  const total  = 3;
+  let cur = 0;
+
+  function goTo(n) {
+    cur = (n + total) % total;
+    track.style.transform = `translateX(-${cur * 100}%)`;
+    dots.forEach((d,i) => d.classList.toggle('active', i === cur));
+  }
+
+  prevBtn?.addEventListener('click', () => goTo(cur - 1));
+  nextBtn?.addEventListener('click', () => goTo(cur + 1));
+  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
+
+  // Touch/swipe support
+  let tx = 0;
+  track?.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  track?.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
+  }, {passive:true});
+})();
+
+
+/* ─── SLOGAN SCROLL-DRIVEN RINGS ─────────── */
+const sloganSec    = document.querySelector('.slogan-section');
+const ringsWrapper = document.getElementById('rings-wrapper');
+const sloganIcon   = document.querySelector('.slogan-icon-wrap');
+
+// Build 10 concentric rings, each 24px wider than previous
+(function buildRings(){
+  const ICON_W  = 80;
+  const RATIO   = 675 / 540;
+  const STEP    = 24;
+  const NUM     = 10;
+  const BASE_OP = [0.22,0.19,0.17,0.15,0.13,0.11,0.09,0.07,0.05,0.03];
+
+  for (let i = 0; i < NUM; i++) {
+    const w = ICON_W + STEP * (i + 1);
+    const h = w * RATIO;
+    const ring = document.createElement('div');
+    ring.className = 'ring-layer';
+    ring.style.cssText = [
+      `width:${w}px`,
+      `height:${h}px`,
+      `left:${-w / 2}px`,
+      `top:${-h / 2}px`,
+      `opacity:${BASE_OP[i]}`
+    ].join(';');
+    ringsWrapper?.appendChild(ring);
+  }
+})();
+
+// Align rings-wrapper center to the actual icon center within the section
+// sloganSec has position:relative so sloganIcon.offsetParent === sloganSec
+function alignRingsToIcon() {
+  if (!sloganIcon || !ringsWrapper) return;
+  const cx = sloganIcon.offsetLeft + sloganIcon.offsetWidth  / 2;
+  const cy = sloganIcon.offsetTop  + sloganIcon.offsetHeight / 2;
+  ringsWrapper.style.left = cx + 'px';
+  ringsWrapper.style.top  = cy + 'px';
+}
+
+let ringsScale = 1;
+
+function updateRings() {
+  if (!sloganSec || !ringsWrapper) return;
+  const rect = sloganSec.getBoundingClientRect();
+  const vh   = window.innerHeight;
+  const p    = Math.max(0, Math.min(1, (vh - rect.top) / (vh + rect.height)));
+  ringsScale  = 1 + p * 5.5;
+  ringsWrapper.style.transform = `translate(-50%, -50%) scale(${ringsScale})`;
+}
+
+// Init position then animate
+alignRingsToIcon();
+window.addEventListener('resize', alignRingsToIcon, {passive: true});
+window.addEventListener('scroll', updateRings, {passive: true});
+updateRings();
+
+
+/* ─── HAMBURGER MENU ─────────────────────── */
+const burger     = document.getElementById('nav-burger');
+const mobileMenu = document.getElementById('nav-mobile-menu');
+
+burger?.addEventListener('click', e => {
+  e.stopPropagation();
+  const isOpen = mobileMenu.classList.toggle('open');
+  burger.classList.toggle('open', isOpen);
+  burger.setAttribute('aria-expanded', isOpen);
+});
+
+mobileMenu?.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  });
+});
+
+document.addEventListener('click', e => {
+  if (!burger?.contains(e.target) && !mobileMenu?.contains(e.target)) {
+    mobileMenu?.classList.remove('open');
+    burger?.classList.remove('open');
+    burger?.setAttribute('aria-expanded', 'false');
+  }
+});
+</script>
+</body>
+</html>
